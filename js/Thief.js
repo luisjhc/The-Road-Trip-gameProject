@@ -19,6 +19,6 @@ class Thief {
       this.speedY = -this.speedY;
     }
     //image of the thief
-    image(ladron, this.x, this.y, this.width, this.height);
+    image(thief, this.x, this.y, this.width, this.height);
   }
 }

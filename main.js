@@ -5,7 +5,8 @@ const game = new Game();
 function preload() {
   backgroundImage = loadImage("images/lisbon.jpg");
   van = loadImage("/images/car.png");
-  ladron = loadImage("/images/thief.jpg");
+  thief = loadImage("/images/thief.jpg");
+  pastel = loadImage("/images/pastel.jpg");
 }
 
 function draw() {
@@ -15,6 +16,7 @@ function draw() {
 //set up canvas
 function setup() {
   createCanvas(WIDTH, HEIGHT);
+  game.setup();
 }
 
 //checks if we press a key

@@ -8,3 +8,4 @@ const HEIGHT = 350;
 let backgroundImage;
 let van;
 let ladron;
+let pastel;
