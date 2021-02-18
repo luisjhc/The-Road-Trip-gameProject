@@ -13,10 +13,16 @@ class Background {
     //first image
     image(backgroundImage, this.x, this.y, this.width, this.height);
     //second image. Starts at the end of the first one
-    image(backgroundImage, this.x + this.width, this.y, this.width, this.height);
+    image(
+      backgroundImage,
+      this.x + this.width,
+      this.y,
+      this.width,
+      this.height
+    );
     //reset the canvas. Images ar in a never ending loop
     if (this.x <= -this.width) {
-        this.x = 0;
-      }
+      this.x = 0;
+    }
   }
 }

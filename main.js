@@ -5,6 +5,7 @@ const game = new Game();
 function preload() {
   backgroundImage = loadImage("images/lisbon.jpg");
   van = loadImage("/images/car.png");
+  ladron = loadImage("/images/thief.jpg");
 }
 
 function draw() {
@@ -16,7 +17,7 @@ function setup() {
   createCanvas(WIDTH, HEIGHT);
 }
 
-//checks if space bar is pressed
+//checks if we press a key
 function keyPressed() {
   game.keyPressed();
 }

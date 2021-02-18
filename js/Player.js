@@ -1,51 +1,66 @@
 //class for the player
 class Player {
-    constructor() {
-        this.x = 50;
-        this.y = 252;
-        this.width = 100;
-        this.height = 48;
-        this.floor = 300;
-        this.velocity = 0;
-        this.jumpCount = 0;
-    }
+  constructor() {
+    this.x = 80;
+    this.y = 200;
+    this.width = 100;
+    this.height = 48;
+  }
 
-    //call jump function if space bar is pressed
-    keyPressed() {
-        if (keyCode === 32) {
-            this.jump();
-        }
+  //called from Game.js. Checks if the player is pressing any arrow key and calls the appropriate function
+  keyPressed() {
+    if (keyCode === 38) {
+      this.moveUp();
     }
-
-    jump() {
-        //stop the execution of the jump function if the player reach 2 jumps
-        if (this.jumpCount === 2) {
-            return;
-        }
-        //increase the jumpcount;
-        this.jumpCount++;
-        //makes the player go up
-        this.y -= 10;
-        //adding resistance going up and gain velocity going down
-        this.velocity -= 5;
+    if (keyCode === 37) {
+      this.moveLeft();
     }
-
-    draw() {
-        //increase velocity. The higher the player jumps, the higher will be velocity
-        this.velocity += GRAVITY;
-        //makes the player go down
-        this.y += this.velocity;
-        
-        //This doesn't allow the player to go below the floor
-        if (this.y >= this.floor) {
-            this.y = this.floor;
-            //Once the player is on the floor, the velocity is reseted
-            this.velocity = 0;
-            //Once the player is on the floor, the jumCount is reseted
-            this.jumpCount = 0;
-        }
-
-        //draw the player
-        image(van, this.x, this.y, this.width, this.height);
+    if (keyCode === 39) {
+      this.moveRight();
     }
+    if (keyCode === 40) {
+      this.moveDown();
+    }
+  }
+
+  moveUp() {
+    // player moves up 30px
+    this.y -= 30;
+    //keeps player in the canvas
+    if (this.y < 0) {
+      this.y = 0;
+    }
+  }
+
+  moveLeft() {
+    // player moves left 30px
+    this.x -= 30;
+    //keeps player in the canvas
+    if (this.x < 0) {
+      this.x = 0;
+    }
+  }
+
+  moveDown() {
+    // player moves down 30px
+    this.y += 30;
+    //keeps player in the canvas
+    if (this.y + this.height > HEIGHT) {
+      this.y = HEIGHT - this.height;
+    }
+  }
+
+  moveRight() {
+    // player moves right 30px
+    this.x += 30;
+    //keeps player in the canvas
+    if (this.x + this.width > WIDTH) {
+      this.x = WIDTH - this.width;
+    }
+  }
+
+  draw() {
+    //draw the player
+    image(van, this.x, this.y, this.width, this.height);
+  }
 }
