@@ -9,7 +9,8 @@ class Game {
     this.player = new Player();
     //calling the pastel
     this.pastel = new Pastel();
-    //this.heart = new Heart(this.x);
+    //this.heart = new Heart(10);
+    this.x = 10;
     //array of hearts
     this.hearts = [];
     //score
@@ -39,8 +40,8 @@ class Game {
     this.pastel.draw();
     //draws hearts
     for (let i = 0; this.hearts.length < 3; i++) {
-      this.hearts.push(new Heart(10));
-      this.x += 10;
+      this.hearts.push(new Heart(this.x));
+      this.x += 25;
     }
 
     this.hearts.forEach((heart) => {
@@ -49,7 +50,7 @@ class Game {
 
     // frameCount is always counting + 1 on every loop of the function draw
     // frame 60/s. 90 -> Every 1,5s push / create a new thief on the array
-    if (frameCount % 90 === 0) {
+    if (frameCount % 30 === 0) {
       this.thiefs.push(new Thief());
     }
 
@@ -128,7 +129,6 @@ class Game {
     const isTouchingOnBottom = thiefTopArea < playerBottomArea;
     const isTouchingOnRight = thiefLeftArea < playerRightArea;
     const isTouchingOnTop = thiefBottomArea > playerTopArea;
-
     return (
       isTouchingOnRight &&
       isTouchingOnTop &&
