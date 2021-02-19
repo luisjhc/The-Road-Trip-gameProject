@@ -63,4 +63,8 @@ class Player {
     //draw the player
     image(van, this.x, this.y, this.width, this.height);
   }
+  resetPlayer() {
+    this.x = 80;
+    this.y = 200;
+  }
 }

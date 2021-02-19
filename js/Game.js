@@ -9,6 +9,9 @@ class Game {
     this.player = new Player();
     //calling the pastel
     this.pastel = new Pastel();
+    //this.heart = new Heart(this.x);
+    //array of hearts
+    this.hearts = [];
     //score
     this.score = 0;
   }
@@ -30,11 +33,19 @@ class Game {
 
     // draws the background
     this.background.draw();
-
     // draws the player
     this.player.draw();
-
+    // draws the pastel
     this.pastel.draw();
+    //draws hearts
+    for (let i = 0; this.hearts.length < 3; i++) {
+      this.hearts.push(new Heart(10));
+      this.x += 10;
+    }
+
+    this.hearts.forEach((heart) => {
+      heart.draw();
+    });
 
     // frameCount is always counting + 1 on every loop of the function draw
     // frame 60/s. 90 -> Every 1,5s push / create a new thief on the array
@@ -46,10 +57,26 @@ class Game {
     this.thiefs.forEach((thief, index) => {
       // draw it
       thief.draw();
-
-      // check if it is coliding with the player
+      
       if (this.collisionCheckThief(this.player, thief)) {
-        console.log("WATCH OUT FOR THE THINGY");
+        this.hearts.pop();
+        if (this.hearts.length === 0) {
+          noLoop();
+          const button = document.createElement("button");
+          button.innerText = "Ouch! The thief stole your campervan!!, play again?";
+          button.style.background = "green";
+          document.body.appendChild(button);
+          //When the button is pressed, restart the game, set score to 0, and remove the button
+          button.onclick = () => {
+            this.pastel.setRandomPosition();
+            this.player.resetPlayer();
+            this.thiefs = [];
+            this.score = 0;
+            score.innerText = this.score;
+            button.parentNode.removeChild(button);
+            loop();
+          };
+        }
       }
 
       // remove the thief if its totally off canvas
@@ -62,6 +89,26 @@ class Game {
     if (this.collisionCheckPastel(this.player, this.pastel)) {
       this.pastel.setRandomPosition();
       this.score++;
+      //show the score on the screen
+      score.innerText = this.score;
+      //if score gets 5, the button to play again appears
+      if (this.score === 5) {
+        noLoop();
+        const button = document.createElement("button");
+        button.innerText = "Well done!! you caught all the custard tarts!!, Play again?";
+        button.style.background = "green";
+        document.body.appendChild(button);
+        //When the button is pressed, restart the game, set score to 0, and remove the button
+        button.onclick = () => {
+          this.pastel.setRandomPosition();
+          this.player.resetPlayer();
+          this.thiefs = [];
+          this.score = 0;
+          score.innerText = this.score;
+          button.parentNode.removeChild(button);
+          loop();
+        };
+      }
     }
   }
 
@@ -114,5 +161,4 @@ class Game {
       isTouchingOnLeftpastel
     );
   }
-
 }
