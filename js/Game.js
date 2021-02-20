@@ -1,6 +1,7 @@
 //class that control the logic of the game
 class Game {
   constructor() {
+    this.isRunning = false;
     //calling the background
     this.background = new Background();
     //empty array of thiefs
@@ -15,7 +16,6 @@ class Game {
     this.hearts = [];
     //score
     this.score = 0;
-    //this.collision = false;
   }
 
   //set the pastel in a random position at the beginning of the game
@@ -39,8 +39,7 @@ class Game {
   //draw the game
   draw() {
     // clears out the canvas at the beggining of every loop
-    clear();
-
+    clear();    
     // draws the background
     this.background.draw();
     // draws the player
@@ -57,7 +56,6 @@ class Game {
     if (frameCount % 90 === 0) {
       this.thiefs.push(new Thief());
     }
-
     // array of thiefs. for every single thief in the array:
     this.thiefs.forEach((thief, index) => {
       // draw it
@@ -73,7 +71,6 @@ class Game {
         if (this.hearts.length === 0) {
           noLoop();
           //Shows the button
-          const button = document.createElement("button");
           button.innerText = "Ouch! The thief stole your campervan!!, play again?";
           document.body.appendChild(button);
           //When the button is pressed, restart the game creating the hearts, set score to 0, and remove the button
@@ -85,7 +82,7 @@ class Game {
             this.x = 10;
             this.createHearts();
             this.score = 0;
-            score.innerText = this.score;
+            scoreNumber.innerText = this.score;
             button.parentNode.removeChild(button);
             loop();
           };
@@ -103,12 +100,11 @@ class Game {
       this.pastel.setRandomPosition();
       this.score++;
       //show the score on the screen
-      score.innerText = this.score;
+      scoreNumber.innerText = this.score;
       //if score gets to 5:
       if (this.score === 5) {
         noLoop();
         //Shows the button
-        const button = document.createElement("button");
         button.innerText = "Well done!! you caught all the custard tarts!!, Play again?";
         document.body.appendChild(button);
         //When the button is pressed, restart the game creating the hearts, set score to 0, and remove the button
@@ -120,7 +116,7 @@ class Game {
           this.x = 10;
           this.createHearts();
           this.score = 0;
-          score.innerText = this.score;
+          scoreNumber.innerText = this.score;
           button.parentNode.removeChild(button);
           loop();
         };

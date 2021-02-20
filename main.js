@@ -1,6 +1,15 @@
 //Instance with all the info of the game
 const game = new Game();
 
+//connect button with game canvas
+startButton.addEventListener("click", function (event) {
+  startingPage.style.display = "none";
+  yourScore.innerHTML = "Your Score: ";
+  scoreNumber.innerHTML = "0";
+  game.isRunning = true;
+  //gameMusic.play();
+});
+
 //Load images
 function preload() {
   presentation = loadImage("./images/presentation.jpg")
@@ -12,6 +21,9 @@ function preload() {
 }
 
 function draw() {
+    if (game.isRunning === false) {
+      return;
+    }
   game.draw();
 }
 
