@@ -3,11 +3,12 @@ const game = new Game();
 
 //Load images
 function preload() {
-  backgroundImage = loadImage("images/lisbon.jpg");
-  van = loadImage("/images/car.png");
-  thief = loadImage("/images/thief.png");
-  pastel = loadImage("/images/pastel.png");
-  heart = loadImage("/images/heart.png");
+  presentation = loadImage("./images/presentation.jpg")
+  backgroundImage = loadImage("./images/lisbon.jpg");
+  van = loadImage("./images/car.png");
+  thief = loadImage("./images/thief.png");
+  pastel = loadImage("./images/pastel.png");
+  heart = loadImage("./images/heart.png");
 }
 
 function draw() {
