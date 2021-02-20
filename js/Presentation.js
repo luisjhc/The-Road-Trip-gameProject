@@ -1,3 +1,4 @@
+//this class is not used yet
 class Presentation {
     constructor(){
         this.x = 0;

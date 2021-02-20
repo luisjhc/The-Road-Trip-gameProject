@@ -9,7 +9,7 @@ class Game {
     this.player = new Player();
     //calling the pastel
     this.pastel = new Pastel();
-    //this.heart = new Heart(10);
+    //this "x" is to set the hearts at 10px
     this.x = 10;
     //array of hearts
     this.hearts = [];
@@ -28,6 +28,14 @@ class Game {
     this.player.keyPressed();
   }
 
+  //creates the hearts. Hearts are separated 25px from each other. The "x" position is passed to the Heart constructor.
+  createHearts(){
+    for (let i = 0; this.hearts.length < 3; i++) {
+      this.hearts.push(new Heart(this.x));
+      this.x += 25;
+    }
+  }
+
   //draw the game
   draw() {
     // clears out the canvas at the beggining of every loop
@@ -40,40 +48,42 @@ class Game {
     // draws the pastel
     this.pastel.draw();
     //draws hearts
-    for (let i = 0; this.hearts.length < 3; i++) {
-      this.hearts.push(new Heart(this.x));
-      this.x += 25;
-    }
-
     this.hearts.forEach((heart) => {
       heart.draw();
     });
 
     // frameCount is always counting + 1 on every loop of the function draw
-    // frame 60/s. 90 -> Every 1,5s push / create a new thief on the array
+    // frame 60/s. 90 -> Every 1,5s push a new thief on the array
     if (frameCount % 90 === 0) {
       this.thiefs.push(new Thief());
     }
 
-    // array of thiefs. for every single thief in the array we will:
+    // array of thiefs. for every single thief in the array:
     this.thiefs.forEach((thief, index) => {
       // draw it
       thief.draw();
       
+      //checks if there is a collision with a thief
       if (this.collisionCheckThief(this.player, thief)) {
-      //if (this.collision === true){
+        //remove the thief
+        this.thiefs.splice(index, 1);
+        //remove one heart
         this.hearts.pop();
+        //if there are no more hearts left:
         if (this.hearts.length === 0) {
           noLoop();
+          //Shows the button
           const button = document.createElement("button");
           button.innerText = "Ouch! The thief stole your campervan!!, play again?";
           document.body.appendChild(button);
-          //When the button is pressed, restart the game, set score to 0, and remove the button
+          //When the button is pressed, restart the game creating the hearts, set score to 0, and remove the button
           button.onclick = () => {
             this.pastel.setRandomPosition();
             this.player.resetPlayer();
             this.thiefs = [];
-            //this.hearts = [];
+            this.hearts = [];
+            this.x = 10;
+            this.createHearts();
             this.score = 0;
             score.innerText = this.score;
             button.parentNode.removeChild(button);
@@ -88,24 +98,27 @@ class Game {
       }
     });
 
-    //if we catch the pastel -> score +1 and new random position
+    //if we catch the pastel -> score +1 and new random position for the pastel
     if (this.collisionCheckPastel(this.player, this.pastel)) {
       this.pastel.setRandomPosition();
       this.score++;
       //show the score on the screen
       score.innerText = this.score;
-      //if score gets 5, the button to play again appears
-      if (this.score === 3) {
+      //if score gets to 5:
+      if (this.score === 5) {
         noLoop();
+        //Shows the button
         const button = document.createElement("button");
         button.innerText = "Well done!! you caught all the custard tarts!!, Play again?";
         document.body.appendChild(button);
-        //When the button is pressed, restart the game, set score to 0, and remove the button
+        //When the button is pressed, restart the game creating the hearts, set score to 0, and remove the button
         button.onclick = () => {
           this.pastel.setRandomPosition();
           this.player.resetPlayer();
           this.thiefs = [];
-          //this.hearts = [];
+          this.hearts = [];
+          this.x = 10;
+          this.createHearts();
           this.score = 0;
           score.innerText = this.score;
           button.parentNode.removeChild(button);
@@ -127,29 +140,11 @@ class Game {
     const thiefRightArea = thief.x + thief.width;
     const thiefBottomArea = thief.y + thief.height;
 
-    // if(thiefRightArea = playerRightArea){
-    //   let isTouchingOnLeft = true;
-    //   return isTouchingOnLeft
-    // }
-    // if(thiefTopArea = playerBottomArea){
-    //   let isTouchingOnBottom = true;
-    //   return isTouchingOnBottom
-    // }
-    // if(thiefLeftArea = playerLeftArea){
-    //   let isTouchingOnRight = true;
-    //   return isTouchingOnRight
-    // }
-    // if(thiefBottomArea = playerTopArea){
-    //   let isTouchingOnTop = true;
-    //   return isTouchingOnTop
-    // }
     const isTouchingOnLeft = thiefRightArea > playerLeftArea;
     const isTouchingOnBottom = thiefTopArea < playerBottomArea;
     const isTouchingOnRight = thiefLeftArea < playerRightArea;
     const isTouchingOnTop = thiefBottomArea > playerTopArea;
-    // if(isTouchingOnBottom && isTouchingOnLeft && isTouchingOnRight && isTouchingOnTop) {
-    //   this.collision = true;
-    // }
+
     return (
       isTouchingOnRight &&
       isTouchingOnTop &&

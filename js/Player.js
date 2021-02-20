@@ -63,6 +63,8 @@ class Player {
     //draw the player
     image(van, this.x, this.y, this.width, this.height);
   }
+
+  // function to reset the player whe the button is pressed
   resetPlayer() {
     this.x = 80;
     this.y = 200;

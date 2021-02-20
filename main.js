@@ -19,6 +19,7 @@ function draw() {
 function setup() {
   createCanvas(WIDTH, HEIGHT);
   game.setup();
+  game.createHearts();
 }
 
 //checks if we press a key
