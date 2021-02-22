@@ -5,7 +5,7 @@ const WIDTH = 1000;
 const HEIGHT = 350;
 
 //This is used to display the score
-const scoreNumber = document.querySelector("h1 span");
+const scoreNumber = document.querySelector(".span");
 const yourScore = document.querySelector("h1");
 
 const startingPage = document.querySelector(".startingPage");
