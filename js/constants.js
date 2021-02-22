@@ -5,17 +5,13 @@ const WIDTH = 1000;
 const HEIGHT = 350;
 
 //This is used to display the score
-const scoreNumber = document.querySelector("h1 span");
-const yourScore = document.querySelector("h1");
+
+const selectH1 = document.querySelector("h1");
+const createSpan = document.createElement("span");
+const selectspan = document.querySelector("h1 span");
+const scoreNumber = document.createTextNode(0);
 
 const startingPage = document.querySelector(".startingPage");
 const startButton = document.querySelector(".startButton");
 
 const button = document.createElement("button");
-
-//variables for images. You can check them in main.js, function preload().
-let backgroundImage;
-let van;
-let ladron;
-let pastel;
-let heart;

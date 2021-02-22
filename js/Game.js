@@ -17,7 +17,7 @@ class Game {
     //score
     this.score = 0;
   }
-
+  
   //set the pastel in a random position at the beginning of the game
   setup() {
     this.pastel.setRandomPosition();
@@ -35,11 +35,10 @@ class Game {
       this.x += 25;
     }
   }
-
   //draw the game
   draw() {
     // clears out the canvas at the beggining of every loop
-    clear();    
+    clear();
     // draws the background
     this.background.draw();
     // draws the player
@@ -50,6 +49,11 @@ class Game {
     this.hearts.forEach((heart) => {
       heart.draw();
     });
+    textSize(30);
+    fill(0,0,255)
+    text("Your Score: ", 800, 30)
+    fill(0, 255, 0)
+    text(this.score, 970, 30);
 
     // frameCount is always counting + 1 on every loop of the function draw
     // frame 60/s. 90 -> Every 1,5s push a new thief on the array
@@ -63,13 +67,15 @@ class Game {
       
       //checks if there is a collision with a thief
       if (this.collisionCheckThief(this.player, thief)) {
-        //remove the thief
+        ouch.play();
         this.thiefs.splice(index, 1);
+        //thief.isColliding = true;
         //remove one heart
         this.hearts.pop();
         //if there are no more hearts left:
         if (this.hearts.length === 0) {
           noLoop();
+          image(lose, 0, 0, WIDTH, HEIGHT);
           //Shows the button
           button.innerText = "Ouch! The thief stole your campervan!!, play again?";
           document.body.appendChild(button);
@@ -97,13 +103,16 @@ class Game {
 
     //if we catch the pastel -> score +1 and new random position for the pastel
     if (this.collisionCheckPastel(this.player, this.pastel)) {
+      bite.play();
       this.pastel.setRandomPosition();
       this.score++;
+      //selectspan.innerText = this.score;
       //show the score on the screen
-      scoreNumber.innerText = this.score;
+      //scoreNumber.innerText = this.score;
       //if score gets to 5:
       if (this.score === 5) {
         noLoop();
+        image(win, 0, 0, WIDTH, HEIGHT);
         //Shows the button
         button.innerText = "Well done!! you caught all the custard tarts!!, Play again?";
         document.body.appendChild(button);
@@ -126,7 +135,27 @@ class Game {
 
   // checks if there is a collision between the player and thief
   collisionCheckThief(player, thief) {
-    const playerTopArea = player.y;
+  //   if (thief.isColliding) {
+  //     return false;
+  //   }
+  //   if (player.x + player.width < thief.x) {
+  //     return false;
+  //   }
+
+  //   if (thief.x + thief.width < player.x) {
+  //     return false;
+  //   }
+
+  //   if (player.y > thief.y + thief.height) {
+  //     return false;
+  //   }
+
+  //   if (thief.y > player.y + player.height) {
+  //     return false;
+  //   }
+  //   return true;
+  // }
+  const playerTopArea = player.y;
     const playerLeftArea = player.x;
     const playerRightArea = player.x + player.width;
     const playerBottomArea = player.y + player.height;
@@ -136,19 +165,18 @@ class Game {
     const thiefRightArea = thief.x + thief.width;
     const thiefBottomArea = thief.y + thief.height;
 
-    const isTouchingOnLeft = thiefRightArea > playerLeftArea;
-    const isTouchingOnBottom = thiefTopArea < playerBottomArea;
-    const isTouchingOnRight = thiefLeftArea < playerRightArea;
-    const isTouchingOnTop = thiefBottomArea > playerTopArea;
+    const isTouchingOnLeftpastel = thiefRightArea > playerLeftArea;
+    const isTouchingOnBottompastel = thiefTopArea < playerBottomArea;
+    const isTouchingOnRightpastel = thiefLeftArea < playerRightArea;
+    const isTouchingOnToppastel = thiefBottomArea > playerTopArea;
 
     return (
-      isTouchingOnRight &&
-      isTouchingOnTop &&
-      isTouchingOnBottom &&
-      isTouchingOnLeft
+      isTouchingOnRightpastel &&
+      isTouchingOnToppastel &&
+      isTouchingOnBottompastel &&
+      isTouchingOnLeftpastel
     );
-  }
-
+    }
   // checks if there is a collision between the player and pastel
   collisionCheckPastel(player, pastel) {
     const playerTopArea = player.y;

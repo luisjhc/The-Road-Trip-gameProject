@@ -4,26 +4,32 @@ const game = new Game();
 //connect button with game canvas
 startButton.addEventListener("click", function (event) {
   startingPage.style.display = "none";
-  yourScore.innerHTML = "Your Score: ";
-  scoreNumber.innerHTML = "0";
+  selectH1.innerHTML = "Your Score: ";
+  selectH1.appendChild(createSpan);
+  createSpan.appendChild(scoreNumber);
   game.isRunning = true;
-  //gameMusic.play();
+  reggae.play();
 });
 
 //Load images
 function preload() {
-  presentation = loadImage("./images/presentation.jpg")
+  win = loadImage("./images/win.jpg");
+  lose = loadImage("./images/lose.jpg");
+  presentation = loadImage("./images/presentation.jpg");
   backgroundImage = loadImage("./images/lisbon.jpg");
   van = loadImage("./images/car.png");
   thief = loadImage("./images/thief.png");
   pastel = loadImage("./images/pastel.png");
   heart = loadImage("./images/heart.png");
+  ouch = loadSound("./images/ouch.mp3");
+  bite = loadSound("./images/bite.mp3");
+  reggae = loadSound("./images/reggae.mp3");
 }
 
 function draw() {
-    if (game.isRunning === false) {
-      return;
-    }
+  if (game.isRunning === false) {
+    return;
+  }
   game.draw();
 }
 

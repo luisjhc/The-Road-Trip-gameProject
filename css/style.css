@@ -1,7 +1,32 @@
 body {
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.startingPage {
+  background-image: url("/images/presentation.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: 30px;
+  width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.startButton {
+  margin-top: 20px;
+}
+
+h2 {
+  color: rgb(255, 0, 191);
+}
+
+.startingPage img {
+  width: 150px;
 }
 
 h1 {
@@ -10,13 +35,14 @@ h1 {
 }
 
 button {
-  background-color: #4caf50; /* Green */
+  background-color: #4caf50;
   border: none;
   color: white;
   padding: 10px 10px;
   text-align: center;
   font-size: 16px;
   margin-top: 10px;
+  margin-bottom: 10px;
   transition-duration: 0.4s;
   cursor: pointer;
 }

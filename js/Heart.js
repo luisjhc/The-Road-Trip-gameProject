@@ -7,7 +7,7 @@ class Heart {
     this.width = 20;
     this.height = 20;
   }
-
+  
   draw() {
     image(heart, this.x, this.y, this.width, this.height);
   }
