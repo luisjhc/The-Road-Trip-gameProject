@@ -12,4 +12,9 @@ const selectspan = document.querySelector("h1 span");
 const startingPage = document.querySelector(".startingPage");
 const startButton = document.querySelector(".startButton");
 
+const winPage = document.querySelector(".winPage");
+const losePage = document.querySelector(".losePage");
+
 const button = document.createElement("button");
+
+const loseButton = document.querySelector(".loseButton");

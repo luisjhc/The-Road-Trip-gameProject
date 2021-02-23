@@ -58,3 +58,15 @@ button:hover {
   background-color: #4caf50;
   color: white;
 }
+
+.losePage {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.losePage img {
+  margin-top: 80px;
+  width: 1200px;
+  height: 500px;
+}

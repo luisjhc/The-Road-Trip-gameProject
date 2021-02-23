@@ -1,6 +1,8 @@
 //Instance with all the info of the game
 const game = new Game();
-
+if (game.playerIsLosing === false) {
+  losePage.style.display = "none";
+}
 //connect button with game canvas
 startButton.addEventListener("click", function (event) {
   startingPage.style.display = "none";
@@ -14,17 +16,17 @@ startButton.addEventListener("click", function (event) {
 
 //Load images
 function preload() {
-  win = loadImage("./images/win.jpg");
-  lose = loadImage("./images/lose.jpg");
+  winImage = loadImage("./images/win.jpg");
+  loseImage = loadImage("./images/lose.jpg");
   presentation = loadImage("./images/presentation.jpg");
   backgroundImage = loadImage("./images/lisbon.jpg");
   van = loadImage("./images/car.png");
   thief = loadImage("./images/thief.png");
   pastel = loadImage("./images/pastel.png");
   heart = loadImage("./images/heart.png");
-  ouch = loadSound("./images/ouch.mp3");
-  bite = loadSound("./images/bite.mp3");
-  reggae = loadSound("./images/reggae.mp3");
+  ouch = loadSound("./sound/ouch.mp3");
+  bite = loadSound("./sound/bite.mp3");
+  reggae = loadSound("./sound/reggae.mp3");
 }
 
 function draw() {

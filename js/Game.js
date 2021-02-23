@@ -10,13 +10,15 @@ class Game {
     this.player = new Player();
     //calling the pastel
     this.pastel = new Pastel();
+    this.win = new Win();
+    this.lose = new Lose();
     //this "x" is to set the hearts at 10px
     this.x = 10;
     //array of hearts
     this.hearts = [];
     //score
     this.score = 0;
-    selectspan;
+    this.playerIsLosing = false;
   }
 
   //set the pastel in a random position at the beginning of the game
@@ -35,6 +37,32 @@ class Game {
       this.hearts.push(new Heart(this.x));
       this.x += 25;
     }
+  }
+
+  playerLose() {
+    this.playerIsLosing = true;
+    clear();
+    this.lose.draw();
+    noLoop();
+    loseButton.onclick = () => {
+      this.pastel.setRandomPosition();
+      this.player.resetPlayer();
+      this.thiefs = [];
+      this.hearts = [];
+      this.x = 10;
+      this.createHearts();
+      this.score = 0;
+      selectspan.innerText = this.score;
+      //loseButton.parentNode.removeChild(loseButton);
+      losePage.style.display = "none";
+      loop();
+    };
+  }
+
+  playerWin() {
+    clear();
+    this.win.draw();
+    noLoop();
   }
 
   //draw the game
@@ -72,11 +100,12 @@ class Game {
         //if there are no more hearts left:
         if (this.hearts.length === 0) {
           noLoop();
-          image(lose, 0, 0, WIDTH, HEIGHT);
+          this.playerLose();
+          //image(lose, 0, 0, WIDTH, HEIGHT);
           //Shows the button
-          button.innerText =
-            "Ouch! The thief stole your campervan!!, play again?";
-          document.body.appendChild(button);
+          // button.innerText =
+          //   "Ouch! The thief stole your campervan!!, play again?";
+          // document.body.appendChild(button);
           //When the button is pressed, restart the game creating the hearts, set score to 0, and remove the button
           button.onclick = () => {
             this.pastel.setRandomPosition();
@@ -109,7 +138,8 @@ class Game {
       //if score gets to 5:
       if (this.score === 5) {
         noLoop();
-        image(win, 0, 0, WIDTH, HEIGHT);
+        this.playerWin();
+        //image(win, 0, 0, WIDTH, HEIGHT);
         //Shows the button
         button.innerText =
           "Well done!! you caught all the custard tarts!!, Play again?";
