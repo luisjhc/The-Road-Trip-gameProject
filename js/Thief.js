@@ -1,4 +1,4 @@
-//Each thief will appear at the ende of the canvas but with random "y" and speed 
+//Each thief will appear at the ende of the canvas but with random "y" and speed
 class Thief {
   constructor() {
     this.x = WIDTH;

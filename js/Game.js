@@ -16,8 +16,9 @@ class Game {
     this.hearts = [];
     //score
     this.score = 0;
+    selectspan;
   }
-  
+
   //set the pastel in a random position at the beginning of the game
   setup() {
     this.pastel.setRandomPosition();
@@ -29,7 +30,7 @@ class Game {
   }
 
   //creates the hearts. Hearts are separated 25px from each other. The "x" position is passed to the Heart constructor.
-  createHearts(){
+  createHearts() {
     for (let i = 0; this.hearts.length < 3; i++) {
       this.hearts.push(new Heart(this.x));
       this.x += 25;
@@ -50,11 +51,6 @@ class Game {
     this.hearts.forEach((heart) => {
       heart.draw();
     });
-    textSize(30);
-    fill(0,0,255)
-    text("Your Score: ", 800, 30)
-    fill(0, 255, 0)
-    text(this.score, 970, 30);
 
     // frameCount is always counting + 1 on every loop of the function draw
     // frame 60/s. 90 -> Every 1,5s push a new thief on the array
@@ -65,7 +61,7 @@ class Game {
     this.thiefs.forEach((thief, index) => {
       // draw it
       thief.draw();
-      
+
       //checks if there is a collision with a thief
       if (this.collisionCheckThief(this.player, thief)) {
         ouch.play();
@@ -78,7 +74,8 @@ class Game {
           noLoop();
           image(lose, 0, 0, WIDTH, HEIGHT);
           //Shows the button
-          button.innerText = "Ouch! The thief stole your campervan!!, play again?";
+          button.innerText =
+            "Ouch! The thief stole your campervan!!, play again?";
           document.body.appendChild(button);
           //When the button is pressed, restart the game creating the hearts, set score to 0, and remove the button
           button.onclick = () => {
@@ -89,7 +86,7 @@ class Game {
             this.x = 10;
             this.createHearts();
             this.score = 0;
-            scoreNumber.innerText = this.score;
+            selectspan.innerText = this.score;
             button.parentNode.removeChild(button);
             loop();
           };
@@ -107,15 +104,15 @@ class Game {
       bite.play();
       this.pastel.setRandomPosition();
       this.score++;
-      //selectspan.innerText = this.score;
+      selectspan.innerText = this.score;
       //show the score on the screen
-      //scoreNumber.innerText = this.score;
       //if score gets to 5:
       if (this.score === 5) {
         noLoop();
         image(win, 0, 0, WIDTH, HEIGHT);
         //Shows the button
-        button.innerText = "Well done!! you caught all the custard tarts!!, Play again?";
+        button.innerText =
+          "Well done!! you caught all the custard tarts!!, Play again?";
         document.body.appendChild(button);
         //When the button is pressed, restart the game creating the hearts, set score to 0, and remove the button
         button.onclick = () => {
@@ -126,7 +123,7 @@ class Game {
           this.x = 10;
           this.createHearts();
           this.score = 0;
-          scoreNumber.innerText = this.score;
+          selectspan.innerText = this.score;
           button.parentNode.removeChild(button);
           loop();
         };
@@ -136,27 +133,27 @@ class Game {
 
   // checks if there is a collision between the player and thief
   collisionCheckThief(player, thief) {
-  //   if (thief.isColliding) {
-  //     return false;
-  //   }
-  //   if (player.x + player.width < thief.x) {
-  //     return false;
-  //   }
+    //   if (thief.isColliding) {
+    //     return false;
+    //   }
+    //   if (player.x + player.width < thief.x) {
+    //     return false;
+    //   }
 
-  //   if (thief.x + thief.width < player.x) {
-  //     return false;
-  //   }
+    //   if (thief.x + thief.width < player.x) {
+    //     return false;
+    //   }
 
-  //   if (player.y > thief.y + thief.height) {
-  //     return false;
-  //   }
+    //   if (player.y > thief.y + thief.height) {
+    //     return false;
+    //   }
 
-  //   if (thief.y > player.y + player.height) {
-  //     return false;
-  //   }
-  //   return true;
-  // }
-  const playerTopArea = player.y;
+    //   if (thief.y > player.y + player.height) {
+    //     return false;
+    //   }
+    //   return true;
+    // }
+    const playerTopArea = player.y;
     const playerLeftArea = player.x;
     const playerRightArea = player.x + player.width;
     const playerBottomArea = player.y + player.height;
@@ -177,7 +174,7 @@ class Game {
       isTouchingOnBottompastel &&
       isTouchingOnLeftpastel
     );
-    }
+  }
   // checks if there is a collision between the player and pastel
   collisionCheckPastel(player, pastel) {
     const playerTopArea = player.y;
