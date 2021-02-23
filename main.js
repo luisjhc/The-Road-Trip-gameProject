@@ -4,9 +4,10 @@ const game = new Game();
 //connect button with game canvas
 startButton.addEventListener("click", function (event) {
   startingPage.style.display = "none";
-  selectH1.innerHTML = "Your Score: ";
-  selectH1.appendChild(createSpan);
-  createSpan.appendChild(scoreNumber);
+  selectH1.style.display = "block";
+  //selectH1.innerHTML = "Your Score: ";
+  //selectH1.appendChild(createSpan);
+  //createSpan.appendChild(scoreNumber);
   game.isRunning = true;
   reggae.play();
 });
