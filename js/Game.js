@@ -35,6 +35,7 @@ class Game {
       this.x += 25;
     }
   }
+
   //draw the game
   draw() {
     // clears out the canvas at the beggining of every loop

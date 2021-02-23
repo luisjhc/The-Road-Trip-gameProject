@@ -1,8 +1,8 @@
 //Width of the canvas
-const WIDTH = 1000;
+const WIDTH = 1200;
 
 //Heigth of the canvas
-const HEIGHT = 350;
+const HEIGHT = 500;
 
 //This is used to display the score
 
