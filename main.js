@@ -6,13 +6,13 @@ if (game.playerIsLosing === false) {
 if (game.playerIsWining === false) {
   winPage.style.display = "none";
 }
+if (game.playerLevel2 === false) {
+  nextLevelPage.style.display = "none";
+}
 //connect button with game canvas
 startButton.addEventListener("click", function (event) {
   startingPage.style.display = "none";
-  selectH1.style.display = "block";
-  //selectH1.innerHTML = "Your Score: ";
-  //selectH1.appendChild(createSpan);
-  //createSpan.appendChild(scoreNumber);
+  selectH1Score.style.display = "block";
   game.isRunning = true;
   reggae.play();
 });
@@ -23,6 +23,7 @@ function preload() {
   loseImage = loadImage("./images/lose.jpg");
   presentation = loadImage("./images/presentation.jpg");
   backgroundImage = loadImage("./images/lisbon.jpg");
+  backgroundImageLevel2 = loadImage("./images/berlin.jpg");
   van = loadImage("./images/car.png");
   thief = loadImage("./images/thief.png");
   pastel = loadImage("./images/pastel.png");

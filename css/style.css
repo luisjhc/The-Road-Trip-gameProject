@@ -29,7 +29,12 @@ h2 {
   width: 150px;
 }
 
-h1 {
+#score {
+  display: none;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  color: #000000;
+}
+#totalScore {
   display: none;
   font-family: "Comic Sans MS", cursive, sans-serif;
   color: #000000;
@@ -78,6 +83,18 @@ button:hover {
   align-items: center;
 }
 .winPage img {
+  margin-top: 80px;
+  width: 1200px;
+  height: 500px;
+}
+
+.nextLevelPage {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.nextLevelPage img {
   margin-top: 80px;
   width: 1200px;
   height: 500px;

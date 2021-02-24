@@ -4,6 +4,7 @@ class Game {
     this.isRunning = false;
     //calling the background
     this.background = new Background();
+    this.backgroundLvl2 = new BackgroundLvl2();
     //empty array of thiefs
     this.thiefs = [];
     //calling the player
@@ -12,14 +13,18 @@ class Game {
     this.pastel = new Pastel();
     this.win = new Win();
     this.lose = new Lose();
+    this.nextLevel = new NextLevel();
     //this "x" is to set the hearts at 10px
     this.x = 10;
     //array of hearts
     this.hearts = [];
     //score
     this.score = 0;
+    this.totalScore = 0;
     this.playerIsLosing = false;
     this.playerIsWining = false;
+    this.playerLevel2 = false;
+    this.level = 1;
   }
 
   //set the pastel in a random position at the beginning of the game
@@ -43,6 +48,9 @@ class Game {
   playerLose() {
     this.playerIsLosing = true;
     clear();
+    selectH1Score.style.display = "none";
+    selectH1TotalScore.style.display = "block";
+    selectSpanTotalScore.innerText = this.totalScore;
     this.lose.draw();
     noLoop();
     loseButton.onclick = () => {
@@ -53,15 +61,23 @@ class Game {
       this.x = 10;
       this.createHearts();
       this.score = 0;
-      selectspan.innerText = this.score;
-      //loseButton.parentNode.removeChild(loseButton);
+      this.totalScore = 0;
+      this.level = 1;
       losePage.style.display = "none";
+      this.playerIsLosing = false;
+      selectSpanScore.innerText = this.score;
+      selectH1Score.style.display = "block";
+      selectH1TotalScore.style.display = "none";
       loop();
     };
   }
 
   playerWin() {
     clear();
+    this.playerIsWining = true;
+    selectH1Score.style.display = "none";
+    selectH1TotalScore.style.display = "block";
+    selectSpanTotalScore.innerText = this.totalScore;
     this.win.draw();
     noLoop();
     winButton.onclick = () => {
@@ -72,9 +88,37 @@ class Game {
       this.x = 10;
       this.createHearts();
       this.score = 0;
-      selectspan.innerText = this.score;
-      //loseButton.parentNode.removeChild(loseButton);
+      this.totalScore = 0;
+      this.level = 1;
       winPage.style.display = "none";
+      this.playerIsWining = false;
+      selectSpanScore.innerText = this.score;
+      selectH1Score.style.display = "block";
+      selectH1TotalScore.style.display = "none";
+      loop();
+    };
+  }
+
+  playerNextLevel() {
+    clear();
+    this.playerLevel2 = true;
+    selectH1Score.style.display = "block";
+    this.nextLevel.draw();
+    noLoop();
+    nextLevelButton.onclick = () => {
+      this.pastel.setRandomPosition();
+      this.player.resetPlayer();
+      this.thiefs = [];
+      this.hearts = [];
+      this.x = 10;
+      this.createHearts();
+      this.score = 0;
+      this.level = 2;
+      nextLevelPage.style.display = "none";
+      this.playerLevel2 = false;
+      selectSpanScore.innerText = this.score;
+      selectH1Score.style.display = "block";
+      selectH1TotalScore.style.display = "none";
       loop();
     };
   }
@@ -85,6 +129,10 @@ class Game {
     clear();
     // draws the background
     this.background.draw();
+    if (this.level === 2) {
+      clear();
+      this.backgroundLvl2.draw();
+    }
     // draws the player
     this.player.draw();
     // draws the pastel
@@ -98,6 +146,11 @@ class Game {
     // frame 60/s. 90 -> Every 1,5s push a new thief on the array
     if (frameCount % 90 === 0) {
       this.thiefs.push(new Thief());
+    }
+    if (this.level === 2) {
+      if (frameCount % 60 === 0) {
+        this.thiefs.push(new Thief());
+      }
     }
     // array of thiefs. for every single thief in the array:
     this.thiefs.forEach((thief, index) => {
@@ -128,11 +181,15 @@ class Game {
       bite.play();
       this.pastel.setRandomPosition();
       this.score++;
-      selectspan.innerText = this.score;
+      this.totalScore++;
+      selectSpanScore.innerText = this.score;
       //if score gets to 5:
-      if (this.score === 5) {
+      if (this.score === 2 && this.level === 2) {
         noLoop();
         this.playerWin();
+      }
+      if (this.score === 5 && this.level === 1) {
+        this.playerNextLevel();
       }
     }
   }
