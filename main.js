@@ -3,6 +3,9 @@ const game = new Game();
 if (game.playerIsLosing === false) {
   losePage.style.display = "none";
 }
+if (game.playerIsWining === false) {
+  winPage.style.display = "none";
+}
 //connect button with game canvas
 startButton.addEventListener("click", function (event) {
   startingPage.style.display = "none";

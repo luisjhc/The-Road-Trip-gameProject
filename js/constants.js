@@ -15,6 +15,5 @@ const startButton = document.querySelector(".startButton");
 const winPage = document.querySelector(".winPage");
 const losePage = document.querySelector(".losePage");
 
-const button = document.createElement("button");
-
 const loseButton = document.querySelector(".loseButton");
+const winButton = document.querySelector(".winButton");

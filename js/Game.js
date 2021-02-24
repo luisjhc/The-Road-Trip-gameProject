@@ -19,6 +19,7 @@ class Game {
     //score
     this.score = 0;
     this.playerIsLosing = false;
+    this.playerIsWining = false;
   }
 
   //set the pastel in a random position at the beginning of the game
@@ -63,6 +64,19 @@ class Game {
     clear();
     this.win.draw();
     noLoop();
+    winButton.onclick = () => {
+      this.pastel.setRandomPosition();
+      this.player.resetPlayer();
+      this.thiefs = [];
+      this.hearts = [];
+      this.x = 10;
+      this.createHearts();
+      this.score = 0;
+      selectspan.innerText = this.score;
+      //loseButton.parentNode.removeChild(loseButton);
+      winPage.style.display = "none";
+      loop();
+    };
   }
 
   //draw the game
@@ -94,31 +108,12 @@ class Game {
       if (this.collisionCheckThief(this.player, thief)) {
         ouch.play();
         this.thiefs.splice(index, 1);
-        //thief.isColliding = true;
         //remove one heart
         this.hearts.pop();
         //if there are no more hearts left:
         if (this.hearts.length === 0) {
           noLoop();
           this.playerLose();
-          //image(lose, 0, 0, WIDTH, HEIGHT);
-          //Shows the button
-          // button.innerText =
-          //   "Ouch! The thief stole your campervan!!, play again?";
-          // document.body.appendChild(button);
-          //When the button is pressed, restart the game creating the hearts, set score to 0, and remove the button
-          button.onclick = () => {
-            this.pastel.setRandomPosition();
-            this.player.resetPlayer();
-            this.thiefs = [];
-            this.hearts = [];
-            this.x = 10;
-            this.createHearts();
-            this.score = 0;
-            selectspan.innerText = this.score;
-            button.parentNode.removeChild(button);
-            loop();
-          };
         }
       }
 
@@ -134,29 +129,10 @@ class Game {
       this.pastel.setRandomPosition();
       this.score++;
       selectspan.innerText = this.score;
-      //show the score on the screen
       //if score gets to 5:
       if (this.score === 5) {
         noLoop();
         this.playerWin();
-        //image(win, 0, 0, WIDTH, HEIGHT);
-        //Shows the button
-        button.innerText =
-          "Well done!! you caught all the custard tarts!!, Play again?";
-        document.body.appendChild(button);
-        //When the button is pressed, restart the game creating the hearts, set score to 0, and remove the button
-        button.onclick = () => {
-          this.pastel.setRandomPosition();
-          this.player.resetPlayer();
-          this.thiefs = [];
-          this.hearts = [];
-          this.x = 10;
-          this.createHearts();
-          this.score = 0;
-          selectspan.innerText = this.score;
-          button.parentNode.removeChild(button);
-          loop();
-        };
       }
     }
   }

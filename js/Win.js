@@ -7,6 +7,6 @@ class Win {
   }
 
   draw() {
-    image(winImage, this.x, this.y, WIDTH, HEIGHT);
+    winPage.style.display = "flex";
   }
 }

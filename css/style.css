@@ -70,3 +70,15 @@ button:hover {
   width: 1200px;
   height: 500px;
 }
+
+.winPage {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.winPage img {
+  margin-top: 80px;
+  width: 1200px;
+  height: 500px;
+}
