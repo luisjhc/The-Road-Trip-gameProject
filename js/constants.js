@@ -22,3 +22,5 @@ const winButton = document.querySelector(".winButton");
 
 const nextLevelPage = document.querySelector(".nextLevelPage");
 const nextLevelButton = document.querySelector(".nextLevelButton");
+
+let slider;

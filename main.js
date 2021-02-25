@@ -14,7 +14,9 @@ startButton.addEventListener("click", function (event) {
   startingPage.style.display = "none";
   selectH1Score.style.display = "block";
   game.isRunning = true;
+  //reggae.setVolume(0.3);
   reggae.play();
+  reggae.setVolume(0.3);
 });
 
 //Load images
@@ -27,6 +29,7 @@ function preload() {
   van = loadImage("./images/car.png");
   thief = loadImage("./images/thief.png");
   pastel = loadImage("./images/pastel.png");
+  pretzel = loadImage("./images/pretzel.png");
   heart = loadImage("./images/heart.png");
   ouch = loadSound("./sound/ouch.mp3");
   bite = loadSound("./sound/bite.mp3");

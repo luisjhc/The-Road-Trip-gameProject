@@ -11,6 +11,7 @@ class Game {
     this.player = new Player();
     //calling the pastel
     this.pastel = new Pastel();
+    this.pretzel = new Pretzel();
     this.win = new Win();
     this.lose = new Lose();
     this.nextLevel = new NextLevel();
@@ -106,7 +107,7 @@ class Game {
     this.nextLevel.draw();
     noLoop();
     nextLevelButton.onclick = () => {
-      this.pastel.setRandomPosition();
+      this.pretzel.setRandomPosition();
       this.player.resetPlayer();
       this.thiefs = [];
       this.hearts = [];
@@ -136,7 +137,12 @@ class Game {
     // draws the player
     this.player.draw();
     // draws the pastel
-    this.pastel.draw();
+    if (this.level === 1) {
+      this.pastel.draw();
+    }
+    if (this.level === 2) {
+      this.pretzel.draw();
+    }
     //draws hearts
     this.hearts.forEach((heart) => {
       heart.draw();
@@ -184,7 +190,23 @@ class Game {
       this.totalScore++;
       selectSpanScore.innerText = this.score;
       //if score gets to 5:
-      if (this.score === 2 && this.level === 2) {
+      if (this.score === 5 && this.level === 2) {
+        noLoop();
+        this.playerWin();
+      }
+      if (this.score === 5 && this.level === 1) {
+        this.playerNextLevel();
+      }
+    }
+
+    if (this.collisionCheckPretzel(this.player, this.pretzel)) {
+      bite.play();
+      this.pretzel.setRandomPosition();
+      this.score++;
+      this.totalScore++;
+      selectSpanScore.innerText = this.score;
+      //if score gets to 5:
+      if (this.score === 5 && this.level === 2) {
         noLoop();
         this.playerWin();
       }
@@ -196,26 +218,6 @@ class Game {
 
   // checks if there is a collision between the player and thief
   collisionCheckThief(player, thief) {
-    //   if (thief.isColliding) {
-    //     return false;
-    //   }
-    //   if (player.x + player.width < thief.x) {
-    //     return false;
-    //   }
-
-    //   if (thief.x + thief.width < player.x) {
-    //     return false;
-    //   }
-
-    //   if (player.y > thief.y + thief.height) {
-    //     return false;
-    //   }
-
-    //   if (thief.y > player.y + player.height) {
-    //     return false;
-    //   }
-    //   return true;
-    // }
     const playerTopArea = player.y;
     const playerLeftArea = player.x;
     const playerRightArea = player.x + player.width;
@@ -226,16 +228,16 @@ class Game {
     const thiefRightArea = thief.x + thief.width;
     const thiefBottomArea = thief.y + thief.height;
 
-    const isTouchingOnLeftpastel = thiefRightArea > playerLeftArea;
-    const isTouchingOnBottompastel = thiefTopArea < playerBottomArea;
-    const isTouchingOnRightpastel = thiefLeftArea < playerRightArea;
-    const isTouchingOnToppastel = thiefBottomArea > playerTopArea;
+    const isTouchingOnLeftThief = thiefRightArea > playerLeftArea;
+    const isTouchingOnBottomThief = thiefTopArea < playerBottomArea;
+    const isTouchingOnRightThief = thiefLeftArea < playerRightArea;
+    const isTouchingOnTopThief = thiefBottomArea > playerTopArea;
 
     return (
-      isTouchingOnRightpastel &&
-      isTouchingOnToppastel &&
-      isTouchingOnBottompastel &&
-      isTouchingOnLeftpastel
+      isTouchingOnRightThief &&
+      isTouchingOnTopThief &&
+      isTouchingOnBottomThief &&
+      isTouchingOnLeftThief
     );
   }
   // checks if there is a collision between the player and pastel
@@ -260,6 +262,30 @@ class Game {
       isTouchingOnToppastel &&
       isTouchingOnBottompastel &&
       isTouchingOnLeftpastel
+    );
+  }
+
+  collisionCheckPretzel(player, pretzel) {
+    const playerTopArea = player.y;
+    const playerLeftArea = player.x;
+    const playerRightArea = player.x + player.width;
+    const playerBottomArea = player.y + player.height;
+
+    const pretzelTopArea = pretzel.y;
+    const pretzelLeftArea = pretzel.x;
+    const pretzelRightArea = pretzel.x + pretzel.width;
+    const pretzelBottomArea = pretzel.y + pretzel.height;
+
+    const isTouchingOnLeftPretzel = pretzelRightArea > playerLeftArea;
+    const isTouchingOnBottomPretzel = pretzelTopArea < playerBottomArea;
+    const isTouchingOnRightPretzel = pretzelLeftArea < playerRightArea;
+    const isTouchingOnTopPretzel = pretzelBottomArea > playerTopArea;
+
+    return (
+      isTouchingOnRightPretzel &&
+      isTouchingOnTopPretzel &&
+      isTouchingOnBottomPretzel &&
+      isTouchingOnLeftPretzel
     );
   }
 }

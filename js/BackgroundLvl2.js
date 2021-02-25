@@ -23,5 +23,10 @@ class BackgroundLvl2 {
     if (this.x <= -this.width) {
       this.x = 0;
     }
+
+    textSize(30);
+    fill(30, 225, 58);
+    textFont("Comic Sans MS");
+    text("LEVEL 2", 550, 30);
   }
 }

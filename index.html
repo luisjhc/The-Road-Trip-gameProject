@@ -6,12 +6,13 @@
     <title>Road Trip Game</title>
     <link rel="stylesheet" href="css/style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/addons/p5.sound.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.2.0/addons/p5.sound.js"></script>
   </head>
   <body>
     <div class="startingPage">
-      <h2>Get 5 custard tarts to win!:</h2>
+      <h2>Get 5 custard tarts (level 1) or pretzels (level 2) to win!:</h2>
       <img src="./images/pastel.png" alt="pastel" />
+      <img src="./images/pretzel.png" alt="pastel" />
       <h2>Avoid the thiefs!:</h2>
       <img src="./images/thief.png" alt="thief" />
       <h2>Move:</h2>
@@ -21,19 +22,19 @@
     <div class="losePage">
       <img src="./images/lose.jpg" alt="loseImage" />
       <button class="loseButton">
-        Ouch! The thief stole your campervan!!, play again?
+        Ouch! The thief stole your campervan!!, Play again?
       </button>
     </div>
     <div class="winPage">
       <img src="./images/win.jpg" alt="winImage" />
       <button class="winButton">
-        Well done!! you caught all the custard tarts!!, Play again?
+        Well done!! you caught all the custard tarts & pretzels!!, Play again?
       </button>
     </div>
     <div class="nextLevelPage">
       <img src="./images/win.jpg" alt="winImage" />
       <button class="nextLevelButton">
-        Well done!! Are you ready for the next level?
+        Well done!! Ready to hit the road again?
       </button>
     </div>
     <h1 id="totalScore">Your total score is: <span>0</span></h1>
@@ -42,6 +43,7 @@
     <script src="js/Player.js"></script>
     <script src="js/Thief.js"></script>
     <script src="js/Pastel.js"></script>
+    <script src="js/Pretzel.js"></script>
     <script src="js/Heart.js"></script>
     <script src="js/Lose.js"></script>
     <script src="js/Win.js"></script>
