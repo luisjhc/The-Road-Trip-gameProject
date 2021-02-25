@@ -1,19 +1,25 @@
-//class that control the logic of the game
+//class that controls the logic of the game
 class Game {
   constructor() {
+    //The game starts when the button is pressed and change the variable -> true
     this.isRunning = false;
-    //calling the background
+    //Background for level 1
     this.background = new Background();
+    //Background for level 2
     this.backgroundLvl2 = new BackgroundLvl2();
     //empty array of thiefs
     this.thiefs = [];
-    //calling the player
+    //calling the player class
     this.player = new Player();
-    //calling the pastel
+    //calling the pastel class
     this.pastel = new Pastel();
+    //calling the pretzel class
     this.pretzel = new Pretzel();
+    //calling the win class
     this.win = new Win();
+    //calling the lose class
     this.lose = new Lose();
+    //calling the nextLevel class
     this.nextLevel = new NextLevel();
     //this "x" is to set the hearts at 10px
     this.x = 10;
@@ -21,10 +27,13 @@ class Game {
     this.hearts = [];
     //score
     this.score = 0;
+    //total score to display when the player win or lose
     this.totalScore = 0;
+    //variables to use when the player lose, win ore is between levels
     this.playerIsLosing = false;
     this.playerIsWining = false;
     this.playerLevel2 = false;
+    //holds the level
     this.level = 1;
   }
 
@@ -46,6 +55,7 @@ class Game {
     }
   }
 
+  //This function display the losing page and total score. Resets everything to start the game again in level 1
   playerLose() {
     this.playerIsLosing = true;
     clear();
@@ -73,6 +83,7 @@ class Game {
     };
   }
 
+  //This function display the wining page and total score. Resets everything to start the game again in level 1
   playerWin() {
     clear();
     this.playerIsWining = true;
@@ -100,6 +111,7 @@ class Game {
     };
   }
 
+  //This function display the page between levels and score. Resets everything but the total score for level 2
   playerNextLevel() {
     clear();
     this.playerLevel2 = true;
@@ -128,7 +140,7 @@ class Game {
   draw() {
     // clears out the canvas at the beggining of every loop
     clear();
-    // draws the background
+    // draws the background depending on the level
     this.background.draw();
     if (this.level === 2) {
       clear();
@@ -136,20 +148,20 @@ class Game {
     }
     // draws the player
     this.player.draw();
-    // draws the pastel
+    // draws the pastel or pretzel depending on the level
     if (this.level === 1) {
       this.pastel.draw();
     }
     if (this.level === 2) {
       this.pretzel.draw();
     }
-    //draws hearts
+    //draws the hearts
     this.hearts.forEach((heart) => {
       heart.draw();
     });
 
     // frameCount is always counting + 1 on every loop of the function draw
-    // frame 60/s. 90 -> Every 1,5s push a new thief on the array
+    // frame 60/s. 90 -> Every 1,5s push a new thief on the array. If the player is on level 2, the frameCount is set to 1s
     if (frameCount % 90 === 0) {
       this.thiefs.push(new Thief());
     }
@@ -169,7 +181,7 @@ class Game {
         this.thiefs.splice(index, 1);
         //remove one heart
         this.hearts.pop();
-        //if there are no more hearts left:
+        //if there are no more hearts left, the losing page is called
         if (this.hearts.length === 0) {
           noLoop();
           this.playerLose();
@@ -182,14 +194,14 @@ class Game {
       }
     });
 
-    //if we catch the pastel -> score +1 and new random position for the pastel
+    //if we catch the pastel -> score and total score +1, and new random position for the pastel
     if (this.collisionCheckPastel(this.player, this.pastel)) {
       bite.play();
       this.pastel.setRandomPosition();
       this.score++;
       this.totalScore++;
       selectSpanScore.innerText = this.score;
-      //if score gets to 5:
+      //if score gets to 5, the wining page or the next level page is called depending on the level
       if (this.score === 5 && this.level === 2) {
         noLoop();
         this.playerWin();
@@ -199,13 +211,13 @@ class Game {
       }
     }
 
+    //same logic for the pretzel in level 2
     if (this.collisionCheckPretzel(this.player, this.pretzel)) {
       bite.play();
       this.pretzel.setRandomPosition();
       this.score++;
       this.totalScore++;
       selectSpanScore.innerText = this.score;
-      //if score gets to 5:
       if (this.score === 5 && this.level === 2) {
         noLoop();
         this.playerWin();
@@ -265,6 +277,7 @@ class Game {
     );
   }
 
+  // checks if there is a collision between the player and pretzel
   collisionCheckPretzel(player, pretzel) {
     const playerTopArea = player.y;
     const playerLeftArea = player.x;

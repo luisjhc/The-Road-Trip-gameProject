@@ -1,5 +1,7 @@
 //Instance with all the info of the game
 const game = new Game();
+
+//Conditionals to display the correct page
 if (game.playerIsLosing === false) {
   losePage.style.display = "none";
 }
@@ -9,12 +11,12 @@ if (game.playerIsWining === false) {
 if (game.playerLevel2 === false) {
   nextLevelPage.style.display = "none";
 }
-//connect button with game canvas
+
+//connect the start button with game canvas
 startButton.addEventListener("click", function (event) {
   startingPage.style.display = "none";
   selectH1Score.style.display = "block";
   game.isRunning = true;
-  //reggae.setVolume(0.3);
   reggae.play();
   reggae.setVolume(0.3);
 });

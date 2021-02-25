@@ -1,3 +1,4 @@
+//class to display the page between levels
 class NextLevel {
   constructor() {
     this.x = 0;

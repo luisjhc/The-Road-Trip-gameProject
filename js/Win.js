@@ -1,3 +1,4 @@
+//class with the win page
 class Win {
   constructor() {
     this.x = 0;

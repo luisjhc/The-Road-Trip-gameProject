@@ -59,8 +59,8 @@ class Player {
     }
   }
 
+  //draw the player
   draw() {
-    //draw the player
     image(van, this.x, this.y, this.width, this.height);
   }
 

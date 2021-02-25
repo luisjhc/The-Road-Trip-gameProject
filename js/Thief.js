@@ -7,7 +7,6 @@ class Thief {
     this.y = random(0, 300);
     this.speedX = random(2, 5);
     this.speedY = random(2, 5);
-    //this.isColliding = false
   }
 
   // every frame it moves the thief to the left "x" and "y"

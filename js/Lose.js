@@ -1,3 +1,4 @@
+//class to display the page in case the player lose
 class Lose {
   constructor() {
     this.x = 0;

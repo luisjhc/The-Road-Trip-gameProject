@@ -1,3 +1,4 @@
+//class for the level 2 background
 class BackgroundLvl2 {
   constructor() {
     this.x = 0;
@@ -24,6 +25,7 @@ class BackgroundLvl2 {
       this.x = 0;
     }
 
+    //to show the level in the canvas
     textSize(30);
     fill(30, 225, 58);
     textFont("Comic Sans MS");
