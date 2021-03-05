@@ -8,3 +8,4 @@ You just need to avoid the thiefs while catching the custard tarts and Pretzels.
 ![Algorithm schema](./images/readMeImage.jpg)
 
 
+[Link to the game](https://luisjhc.github.io/The-Road-Trip-gameProject/)
